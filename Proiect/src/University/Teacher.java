@@ -1,27 +1,101 @@
 package University;
 
+import MyLog.Log;
 import People.Employee;
 
-import java.util.Objects;
+import java.io.*;
 
 public class Teacher extends Employee {
+    private static boolean fetchedAll = false;
+    private static String fileName = "Teacher.csv";
+    private static FileWriter tableFile = null;
     static private int teacherIdCnt = 0;
+    static private int teacherMaxCnt = 10;
+    static private Teacher[] teachers = new Teacher[teacherMaxCnt];
     private String subject;
     private Department department; // should be changed only from Department class
     // timetable[x][y] := what hour is starting at y (hour) on x (day)
     // where x = day (0:4 -> Mon:Fri) and y = starting hour (0:5 -> {8, 10, 12, 14, 16, 18})
     private Timetable timetable;
 
+    public static void fetchData() {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
+            String row;
+            csvReader.readLine(); // Skip first line
+            while ((row = csvReader.readLine()) != null) {
+                new Teacher ((row+",.").split(","));
+            }
+            fetchedAll = true;
+        } catch (FileNotFoundException e) {
+            System.out.println("No prior data saved for Departments");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            enableModify(true);
+        }
+    }
+
+    public static void enableModify(boolean enable) {
+        if (enable) {
+            tableFile = enableTable(fileName, true);
+        }
+        else {
+            try {
+                tableFile.flush();
+                tableFile.close();
+                tableFile = null;
+            } catch (Exception e) {
+                // enters here when it shall log but the logging is not enabled
+            }
+        }
+    }
+
+    @Override
+    protected void updated () {
+        if (!fetchedAll) {return;}
+        Log.logData("Updated " + this);
+        enableModify (false);
+        tableFile = enableTable(fileName, false);
+        for (int i = 0; i < teacherIdCnt; ++i)
+            if (teachers[i] != null)
+                teachers[i].saveData(tableFile);
+    }
+
+    protected Teacher (String[] csvData) {
+        super (csvData);
+        subject = csvData[11];
+        this.timetable = new Timetable();
+        department = null;
+        teachers[id] = this;
+        teacherIdCnt = id + 1;
+        if (csvData[12].length() != 0) {
+            Department dep = Department.getDepartment(Integer.parseInt(csvData[12]));
+            if (dep != null) {
+                dep.AddTeacher(this);
+            }
+        }
+    }
+
     public Teacher (String subject) { // testing purpose
-        super(++teacherIdCnt, "", "", "", '\0', "", "", 0, "Teacher", "");
+        super(teacherIdCnt++, "", "", "", 'M', "", "", 0, "Teacher", "");
         this.subject   = subject;
         this.timetable = new Timetable();
+        teachers[id] = this;
+        Log.logData("Created new " + this);
+        saveData(tableFile);
     }
 
     public Teacher(String cnp, String surname, String name, char gender, String phone, String mail, int salary, String job, String EmploymentDate, String subject) {
-        super(++teacherIdCnt, cnp, surname, name, gender, phone, mail, salary, job, EmploymentDate);
+        super(teacherIdCnt++, cnp, surname, name, gender, phone, mail, salary, job, EmploymentDate);
         this.subject = subject;
         timetable    = new Timetable();
+        teachers[id] = this;
+        Log.logData("Created new " + this);
+        saveData(tableFile);
+    }
+
+    public static Teacher getTeacher (int id) {
+        return id >= teacherIdCnt ? null : teachers[id];
     }
 
     public String getSubject() {
@@ -30,6 +104,7 @@ public class Teacher extends Employee {
 
     public void setSubject(String subject) {
         this.subject = subject;
+        updated();
     }
 
     public Department getDepartment() {
@@ -38,6 +113,7 @@ public class Teacher extends Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+        updated();
     }
 
     public void AddHour (Hour hour) {
@@ -64,5 +140,9 @@ public class Teacher extends Employee {
     public String toString() {
         return subject + " Teacher "       + super.toString() +
                 " is in "       + (department == null ? "no department" : department);
+    }
+
+    protected String toCsv() {
+        return super.toCsv() + "," + subject + "," + (department == null ? "" : department.getId());
     }
 }

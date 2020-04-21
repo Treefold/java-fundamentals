@@ -6,6 +6,15 @@ public abstract class Employee extends Person {
     private String employmentDate;
     private String unemploymentDate = "";
 
+    protected Employee (String[] csvData) {
+        super(csvData);
+        salary = Integer.parseInt(csvData[7]);
+        job = csvData[8];
+        employmentDate = csvData[9];
+        unemploymentDate = csvData[10];
+
+    }
+
     public Employee(int id, String cnp, String surname, String name, char gender, String phone, String mail, int salary, String job, String employmentDate) {
         super(id, cnp, surname, name, gender, phone, mail);
         this.salary         = salary;
@@ -19,6 +28,7 @@ public abstract class Employee extends Person {
 
     public void setSalary(int salary) {
         this.salary = salary;
+        updated();
     }
 
     public String getJob() {
@@ -27,6 +37,7 @@ public abstract class Employee extends Person {
 
     public void setJob(String job) {
         this.job = job;
+        updated();
     }
 
     public String getEmploymentDate() {
@@ -35,6 +46,7 @@ public abstract class Employee extends Person {
 
     public void setEmploymentDate(String employmentDate) {
         this.employmentDate = employmentDate;
+        updated();
     }
 
     public String getUnemploymentDate() {
@@ -43,6 +55,7 @@ public abstract class Employee extends Person {
 
     public void setUnemploymentDate(String unemploymentDate) {
         this.unemploymentDate = unemploymentDate;
+        updated();
     }
 
     @Override
@@ -52,5 +65,10 @@ public abstract class Employee extends Person {
                 " working as " + job +
                 " from " + employmentDate +
                 " to " + (unemploymentDate == "" ? "date" : unemploymentDate);
+    }
+
+    @Override
+    protected String toCsv () {
+        return super.toCsv() + ',' + salary + ',' + job + ',' + employmentDate + ',' + unemploymentDate;
     }
 }

@@ -1,21 +1,79 @@
 package University;
 
-import java.util.Arrays;
+import MyLog.Log;
+import MyLog.Table;
 
-public class ClassOfStudents {
+import java.io.*;
+
+public class ClassOfStudents extends Table {
     static private int classIdCnt;
+    static private int classMaxCnt = 10;
+    static private ClassOfStudents[] classes = new ClassOfStudents[classMaxCnt];
+    static private String fileName = "ClassOfStudents.csv";
+    static private FileWriter tableFile = null;
     static private int maxClassSize = 33;
     private int classSize;
     private int id;
     private String name;
     private Student[] students; // always sorted by surname, on equal by name, on equal by id
     private Timetable timetable;
+
+    public static void fetchData() {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
+            String row;
+            csvReader.readLine(); // Skip first line
+            while ((row = csvReader.readLine()) != null) {
+                new ClassOfStudents (row.split(","));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No prior data saved for Departments");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            enableModify(true);
+        }
+    }
+
+    public static void enableModify(boolean enable) {
+        // Departments can only be added
+        if (enable) {
+            tableFile = enableTable(fileName, true);
+        }
+        else {
+            try {
+                tableFile.flush();
+                tableFile.close();
+                tableFile = null;
+            } catch (Exception e) {
+                // enters here when it shall log but the logging is not enabled
+            }
+        }
+    }
+
+    private ClassOfStudents (String[] csvData) {
+        // all data was written by us with this app so the data should be valid
+        this.id        = Integer.parseInt(csvData[0]);
+        this.students  = new Student[maxClassSize];
+        this.classSize = 0;
+        this.name      = csvData[1];
+        this.timetable = new Timetable();
+        classes[id]    = this;
+        classIdCnt     = id + 1;
+    }
+
     public ClassOfStudents(String name) {
         this.id        = classIdCnt++;
         this.students  = new Student[maxClassSize];
         this.classSize = 0;
         this.name      = name;
         this.timetable = new Timetable();
+        classes[id]    = this;
+        Log.logData("Created new " + this);
+        saveData(tableFile);
+    }
+
+    static public ClassOfStudents getClass (int id) {
+        return id >= classIdCnt ? null : classes[id];
     }
 
     public int getId() {
@@ -90,5 +148,10 @@ public class ClassOfStudents {
         }
         toPrint += "\n}";
         return toPrint;
+    }
+
+    @Override
+    protected String toCsv () {
+        return id + "," + name;
     }
 }

@@ -1,25 +1,78 @@
 package University;
 
-public class Department {
+import MyLog.Log;
+import MyLog.Table;
+
+import java.io.*;
+
+public class Department extends Table {
     static private int depIdCnt;
     static private int depMaxCnt = 30;
     static private int depSizeCnt;
     static private int depMaxSize = 10;
     static private Department[] departments = new Department[depMaxCnt];
+    private static String fileName = "Department.csv"; // fetchData();
+    private static FileWriter tableFile = null; // setFileName(fileName);
     private int id;
     private String name;
     private Teacher[] teachers = new Teacher[depMaxSize];
+
+    public static void fetchData() {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
+            String row;
+            csvReader.readLine(); // Skip first line
+            while ((row = csvReader.readLine()) != null) {
+                new Department (row.split(","));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No prior data saved for Departments");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            enableModify(true);
+        }
+    }
+
+    public static void enableModify(boolean enable) {
+        // Departments can only be added
+        if (enable) {
+            tableFile = enableTable(fileName, true);
+        }
+        else {
+            try {
+                tableFile.flush();
+                tableFile.close();
+                tableFile = null;
+            } catch (Exception e) {
+                // enters here when it shall log but the logging is not enabled
+            }
+        }
+    }
+
+    private Department (String[] csvData) {
+        // all data was written by us with this app so the data should be valid
+        this.id         = Integer.parseInt(csvData[0]);
+        this.name       = csvData[1];
+        departments[id] = this;
+        depIdCnt        = id + 1;
+    }
 
     private Department(String name) {
         this.id = depIdCnt;
         this.name = name;
         departments[depIdCnt++] = this;
+        Log.logData("Created new " + this);
+        saveData(tableFile);
     }
 
     // returns department Id on success and 01 on failure or if it already exists
     static public int CreateDep (String name) {
         if (depIdCnt >= depMaxCnt || getDepartment(name) != null) {return -1;}
         return (new Department(name)).id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -96,7 +149,12 @@ public class Department {
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                "; name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    protected String toCsv () {
+        return id + "," + name;
     }
 }
