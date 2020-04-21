@@ -72,6 +72,10 @@ public class ClassOfStudents extends Table {
         saveData(tableFile);
     }
 
+    static public boolean canCreate() {
+        return classIdCnt < classMaxCnt;
+    }
+
     static public ClassOfStudents getClass (int id) {
         return id >= classIdCnt ? null : classes[id];
     }
@@ -88,26 +92,26 @@ public class ClassOfStudents extends Table {
         return students;
     }
 
-    public boolean IsInClass (Student student) {
+    public boolean isInClass(Student student) {
         return student != null && student.getCls() == this;
     }
 
-    public boolean AddStudent (Student student) {
-        if (IsInClass(student)) {return true;} // already in this class
+    public boolean addStudent(Student student) {
+        if (isInClass(student)) {return true;} // already in this class
         if (student == null || classSize >= maxClassSize) {return false;}
-        if (student.getCls() != null) {student.getCls().RemoveStudent(student);}
+        if (student.getCls() != null) {student.getCls().removeStudent(student);}
         student.setCls(this);
         int currPoz = classSize++;
         // keep the list ordered
-        while (currPoz > 0 && Student.CompareByName(student, students[currPoz-1]) == -1) {
+        while (currPoz > 0 && Student.compareByName(student, students[currPoz-1]) == -1) {
             students[currPoz--] = students[currPoz];
         }
         students[currPoz] = student;
         return true;
     }
 
-    public boolean RemoveStudent (Student student) {
-        if (!IsInClass(student)) {return false;} // not in the class
+    public boolean removeStudent(Student student) {
+        if (!isInClass(student)) {return false;} // not in the class
         int currIndex = 0;
         while (currIndex < classSize) {
             if (student.getId() == students[currIndex].getId()) {break;}
@@ -123,20 +127,19 @@ public class ClassOfStudents extends Table {
         return true;
     }
 
-    public void AddHour (Hour hour) {
-        timetable.AddHour(hour);
+    public void addHour(Hour hour) {
+        timetable.addHour(hour);
     }
 
-    public void ClearHour (int day, int beginsAt) {
-        timetable.ClearHour(day, beginsAt);
+    public void clearHour(int day, int beginsAt) {
+        timetable.clearHour(day, beginsAt);
     }
 
-    public void PrintTimetable () {
+    public void printTimetable() {
         System.out.println("Class " + name + " " + timetable);
     }
 
-    @Override
-    public String toString() {
+    public void printStudents() {
         String toPrint = "ClassOfStudents { \n\tid=" + id + "\n\tname='" + name + "'\n\tstudents: ";
         if (classSize == 0) {toPrint += "No Students";}
         else {
@@ -147,7 +150,22 @@ public class ClassOfStudents extends Table {
             toPrint += "\n\t]";
         }
         toPrint += "\n}";
-        return toPrint;
+        System.out.println(toPrint);
+    }
+
+    public static void printClasses() {
+        if (classIdCnt == 0) {System.out.println("No Classes"); return;}
+        String toPrint = "Classes [";
+        for (int currPoz = 0; currPoz < classIdCnt; ++currPoz) {
+            toPrint += "\n\t" + classes[currPoz];
+        }
+        toPrint += "\n]";
+        System.out.println(toPrint);
+    }
+
+    @Override
+    public String toString() {
+        return"ClassOfStudents {id=" + id + "; name='" + name + "'}";
     }
 
     @Override

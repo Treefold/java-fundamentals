@@ -82,6 +82,16 @@ public class AuxiliaryStuff extends Employee {
         updated();
     }
 
+    public static void printAuziliaryStuff() {
+        if (auxStuffIdCnt == 0) {System.out.println("No Auxiliary stuff"); return;}
+        String toPrint = "Students [";
+        for (int currPoz = 0; currPoz < auxStuffIdCnt; ++currPoz) {
+            toPrint += "\n\t " + auxiliaryStuffs[currPoz];
+        }
+        toPrint += "\n]";
+        System.out.println(toPrint);
+    }
+
     @Override
     public String toString() {
         return "AuxiliaryStuff" + super.toString() +

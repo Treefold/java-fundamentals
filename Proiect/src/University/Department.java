@@ -8,7 +8,7 @@ import java.io.*;
 public class Department extends Table {
     static private int depIdCnt;
     static private int depMaxCnt = 30;
-    static private int depSizeCnt;
+    private int depSizeCnt;
     static private int depMaxSize = 10;
     static private Department[] departments = new Department[depMaxCnt];
     private static String fileName = "Department.csv"; // fetchData();
@@ -49,6 +49,10 @@ public class Department extends Table {
         }
     }
 
+    static public boolean canCreate() {
+        return depIdCnt < depMaxCnt;
+    }
+
     private Department (String[] csvData) {
         // all data was written by us with this app so the data should be valid
         this.id         = Integer.parseInt(csvData[0]);
@@ -66,7 +70,7 @@ public class Department extends Table {
     }
 
     // returns department Id on success and 01 on failure or if it already exists
-    static public int CreateDep (String name) {
+    static public int createDep(String name) {
         if (depIdCnt >= depMaxCnt || getDepartment(name) != null) {return -1;}
         return (new Department(name)).id;
     }
@@ -97,12 +101,12 @@ public class Department extends Table {
         return null; // not found
     }
 
-    public boolean IsInDepartments (Teacher teacher) {
+    public boolean isInDepartments(Teacher teacher) {
         return teacher != null && teacher.getDepartment() == this;
     }
 
-    public void RemoveTeacher (Teacher teacher) {
-        if (!IsInDepartments(teacher)) {return;} // not in this department
+    public void removeTeacher(Teacher teacher) {
+        if (!isInDepartments(teacher)) {return;} // not in this department
         int currIndex = 0;
         while (currIndex < depMaxSize) {
             if (teacher.getId() == teachers[currIndex].getId()) {break;}
@@ -117,15 +121,15 @@ public class Department extends Table {
         --depSizeCnt; // found and eliminated
     }
 
-    public boolean AddTeacher (Teacher teacher) {
-        if (IsInDepartments(teacher)) {return true;}  // already in this department
+    public boolean addTeacher(Teacher teacher) {
+        if (isInDepartments(teacher)) {return true;}  // already in this department
         if (depSizeCnt >= depMaxSize) {return false;} // this department is full
         teacher.setDepartment(this);
         teachers[depSizeCnt++] = teacher;
         return true;
     }
 
-    public void PrintTeachers() {
+    public void printTeachers() {
         if (depSizeCnt == 0) {System.out.println("No Teachers in " + this); return;}
         String toPrint = this + " [";
         for (int currPoz = 0; currPoz < depSizeCnt; ++currPoz) {
@@ -135,7 +139,7 @@ public class Department extends Table {
         System.out.println(toPrint);
     }
 
-    public static void PrintDepartments () {
+    public static void printDepartments() {
         if (depIdCnt == 0) {System.out.println("No Departments"); return;}
         String toPrint = "Departments [";
         for (int currPoz = 0; currPoz < depIdCnt; ++currPoz) {

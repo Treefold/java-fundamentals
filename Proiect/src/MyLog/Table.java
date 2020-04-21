@@ -3,7 +3,6 @@ package MyLog;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// singleton
 public abstract class Table {
     protected static FileWriter enableTable (String FileName, boolean append) {
         try {

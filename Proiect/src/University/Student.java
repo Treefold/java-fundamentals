@@ -10,8 +10,8 @@ public class Student extends Person {
     private static String fileName = "Student.csv";
     private static FileWriter tableFile = null;
     static private int studentsIdCnt = 0;
-    static private int getStudentsMaxCnt = 10;
-    static private Student[] students = new Student[getStudentsMaxCnt];
+    static private int studentsMaxCnt = 10;
+    static private Student[] students = new Student[studentsMaxCnt];
     private ClassOfStudents cls; // should be changed only from ClassOfStudents class
     // TODO: record marks
 
@@ -65,12 +65,12 @@ public class Student extends Person {
         if (csvData[7].length() != 0) {
             ClassOfStudents clss = ClassOfStudents.getClass(Integer.parseInt(csvData[7]));
             if (clss != null) {
-                clss.AddStudent(this);
+                clss.addStudent(this);
             }
         }
     }
 
-    public Student(String name) { // testing purpose
+    public Student(String name) { // testing purpose and for the gast interface
         super(studentsIdCnt++, "", "", name, 'M', "", "");
         students[id] = this;
         Log.logData("Created new " + this);
@@ -82,6 +82,10 @@ public class Student extends Person {
         students[id] = this;
         Log.logData("Created new " + this);
         saveData(tableFile);
+    }
+
+    static public boolean canCreate() {
+        return studentsIdCnt < studentsMaxCnt;
     }
 
     static public Student getStudent (int id) {
@@ -105,13 +109,23 @@ public class Student extends Person {
         return this.id == student.id;
     }
 
+    public static void printStudents() {
+        if (studentsIdCnt == 0) {System.out.println("No Students"); return;}
+        String toPrint = "Students [";
+        for (int currPoz = 0; currPoz < studentsIdCnt; ++currPoz) {
+            toPrint += "\n\t " + students[currPoz];
+        }
+        toPrint += "\n]";
+        System.out.println(toPrint);
+    }
+
     @Override
     public String toString() {
-        return "Student{" + super.toString() + "}";
+        return "Student{" + super.toString() + "} is in " + (cls == null ? "no class" : cls);
     }
 
     // 0 if equal, -1 if student1 < student2; +1 if student1 > student2
-    static public int CompareByName (Student student1, Student student2) {
+    static public int compareByName(Student student1, Student student2) {
         if (student1.equals(student2)) {return 0;}
         int rez = student1.getSurname().compareToIgnoreCase(student2.getSurname());
         if (rez != 0) {return rez < 0 ? -1 : 1;}

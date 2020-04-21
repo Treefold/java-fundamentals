@@ -1,24 +1,22 @@
 package University;
 
-import java.util.Arrays;
-
 public class Timetable {
     // timetable[x][y] := what hour is starting at y (hour) on x (day)
     // where x = day (0:4 -> Mon:Fri) and y = starting hour (0:5 -> {8, 10, 12, 14, 16, 18})
     private Hour[][] timetable = new Hour[5][6];
 
-    public void AddHour (Hour hour) {
+    public void addHour(Hour hour) {
         if (hour == null) {return;}
-        ClearHour(hour.getDay(), hour.getBeginsAt());
+        clearHour(hour.getDay(), hour.getBeginsAt());
         timetable[hour.getDay()][hour.getBeginsAt()] = hour; // accept hour
     }
 
-    public void ClearHour (int day, int beginsAt) {
+    public void clearHour(int day, int beginsAt) {
         if (day > 4 || beginsAt > 5) {return;}
         if (timetable[day][beginsAt] == null) {return;} // already cleared
         Hour previousHour = timetable[day][beginsAt];
         timetable[day][beginsAt] = null; // clear hour for student
-        Hour.DeleteHour(previousHour);   // also delete for the teacher
+        Hour.deleteHour(previousHour);   // also delete for the teacher
     }
 
     @Override

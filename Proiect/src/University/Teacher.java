@@ -71,7 +71,7 @@ public class Teacher extends Employee {
         if (csvData[12].length() != 0) {
             Department dep = Department.getDepartment(Integer.parseInt(csvData[12]));
             if (dep != null) {
-                dep.AddTeacher(this);
+                dep.addTeacher(this);
             }
         }
     }
@@ -92,6 +92,10 @@ public class Teacher extends Employee {
         teachers[id] = this;
         Log.logData("Created new " + this);
         saveData(tableFile);
+    }
+
+    static public boolean canCreate() {
+        return teacherIdCnt < teacherMaxCnt;
     }
 
     public static Teacher getTeacher (int id) {
@@ -116,15 +120,15 @@ public class Teacher extends Employee {
         updated();
     }
 
-    public void AddHour (Hour hour) {
-        timetable.AddHour(hour);
+    public void addHour(Hour hour) {
+        timetable.addHour(hour);
     }
 
-    public void ClearHour (int day, int beginsAt) {
-        timetable.ClearHour(day, beginsAt);
+    public void clearHour(int day, int beginsAt) {
+        timetable.clearHour(day, beginsAt);
     }
 
-    public void PrintTimetable () {
+    public void printTimetable() {
         System.out.println(subject + " Teacher " + timetable);
     }
 
@@ -136,10 +140,33 @@ public class Teacher extends Employee {
         return this.id == teacher.id;
     }
 
+    public static void printTeachers() {
+        if (teacherIdCnt == 0) {System.out.println("No Teachers"); return;}
+        String toPrint = "Teachers [";
+        for (int currPoz = 0; currPoz < teacherIdCnt; ++currPoz) {
+            toPrint += "\n\t " + teachers[currPoz];
+        }
+        toPrint += "\n]";
+        System.out.println(toPrint);
+    }
+
+    public static void printTeachersNoDep() {
+        if (teacherIdCnt == 0) {System.out.println("No Teachers"); return;}
+        boolean atLestOne = false;
+        String toPrint = "Teachers [";
+        for (int currPoz = 0; currPoz < teacherIdCnt; ++currPoz) {
+            if (teachers[currPoz].department == null) {
+                atLestOne = true;
+                toPrint += "\n\t " + teachers[currPoz];
+            }
+        }
+        toPrint += "\n]";
+        System.out.println(atLestOne?toPrint:"No Teachers without Department");
+    }
+
     @Override
     public String toString() {
-        return subject + " Teacher "       + super.toString() +
-                " is in "       + (department == null ? "no department" : department);
+        return subject + " Teacher " + super.toString() + " is in " + (department == null ? "no department" : department);
     }
 
     protected String toCsv() {

@@ -28,17 +28,17 @@ public class Hour {
         this.classOfStudents = classOfStudents; // TODO: check not null
     }
 
-    static public void CreateHour (int day, int beginsAt, String place, Teacher teacher, ClassOfStudents classOfStudents) {
+    static public void createHour(int day, int beginsAt, String place, Teacher teacher, ClassOfStudents classOfStudents) {
         if (teacher == null || classOfStudents == null) {return;} // not a valid hour
         Hour hour = new Hour (day, beginsAt, place, teacher, classOfStudents);
-        teacher.AddHour(hour);
-        classOfStudents.AddHour(hour);
+        teacher.addHour(hour);
+        classOfStudents.addHour(hour);
     }
 
-    static public void DeleteHour (Hour hour) {
+    static public void deleteHour(Hour hour) {
         if (hour == null) {return;}
-        if (hour.teacher != null) {hour.teacher.ClearHour(hour.day, hour.beginsAt);}
-        if (hour.classOfStudents != null) {hour.classOfStudents.ClearHour(hour.day, hour.beginsAt);}
+        if (hour.teacher != null) {hour.teacher.clearHour(hour.day, hour.beginsAt);}
+        if (hour.classOfStudents != null) {hour.classOfStudents.clearHour(hour.day, hour.beginsAt);}
     }
 
     public int getId() {
