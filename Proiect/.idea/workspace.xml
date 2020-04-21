@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07c9bf53-15cc-45dc-9b41-0b2ef290d158" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logging.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Logging.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/MyLog/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/MyLog/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/MyLog/Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/AuxiliaryStuff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/AuxiliaryStuff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/ClassOfStudents.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/ClassOfStudents.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/Department.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/Hour.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/Hour.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/Teacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/Teacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proiect/University/Timetable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proiect/University/Timetable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyLog/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyLog/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyLog/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/AuxiliaryStuff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/AuxiliaryStuff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/ClassOfStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/ClassOfStudents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/Hour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/Hour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/University/Timetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/University/Timetable.java" afterDir="false" />
-    </list>
+    <list default="true" id="07c9bf53-15cc-45dc-9b41-0b2ef290d158" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,12 +10,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,6 +109,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,13 +144,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587508172806" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Course7-exercises" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -254,7 +231,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.092750534" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -372,16 +348,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyLog/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="31" column="67" selection-start-line="31" selection-start-column="67" selection-end-line="31" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MyLog/Test.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_202/src.zip!/java/util/Scanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -520,7 +487,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
