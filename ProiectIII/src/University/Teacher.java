@@ -1,123 +1,143 @@
 package University;
 
+import DB.DB;
 import MyLog.Log;
 import People.Employee;
 
-import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 
 public class Teacher extends Employee {
-    private static boolean fetchedAll = false;
-    private static String fileName = "Teacher.csv";
-    private static FileWriter tableFile = null;
-    static private int teacherIdCnt = 0;
-    static private int teacherMaxCnt = 10;
-    static private Teacher[] teachers = new Teacher[teacherMaxCnt];
-    private String subject;
-    private Department department; // should be changed only from Department class
-    // timetable[x][y] := what hour is starting at y (hour) on x (day)
-    // where x = day (0:4 -> Mon:Fri) and y = starting hour (0:5 -> {8, 10, 12, 14, 16, 18})
+    // project specific added fields (static)
+    static private String tableName = "teachers";
+    static private String idName    = "teacher_id";
+    static private ArrayList<Teacher> teachers = new ArrayList<>();
+    // project specific added fields
     private Timetable timetable;
+        // timetable[x][y] := what hour is starting at y (hour) on x (day)
+        // where x = day (0:4 -> Mon:Fri) and y = starting hour (0:5 -> {8, 10, 12, 14, 16, 18})
+    // table fields
+    private String subject;
+    private Department department; // should be changed only from a Department Object
 
     public static void fetchData() {
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
-            String row;
-            csvReader.readLine(); // Skip first line
-            while ((row = csvReader.readLine()) != null) {
-                new Teacher ((row+",.").split(","));
+        ResultSet data = DB.fetchData(tableName);
+        if (data == null) {
+            Log.logData("No prior data for " + tableName);
+            return;
+        }
+        try {
+            Log.logData("Started fetching data for " + tableName);
+            while (data.next()) {
+                new Teacher(data);
             }
-            fetchedAll = true;
-        } catch (FileNotFoundException e) {
-            System.out.println("No prior data saved for Departments");
-        } catch (IOException e) {
+        } catch (SQLException e) {
+            System.out.println("Data fetching for " + tableName + " has been interrupted");
             e.printStackTrace();
         } finally {
-            enableModify(true);
+            Log.logData("Stopped fetching data for " + tableName);
         }
     }
 
-    public static void enableModify(boolean enable) {
-        if (enable) {
-            tableFile = enableTable(fileName, true);
+    private Teacher (ResultSet data) throws SQLException {
+        super (data);
+        subject = data.getString("subject");
+        department = null;
+        if (data.getString("dept_id") != null) {
+            Department.getDepartment(Integer.parseInt(data.getString("dept_id"))).addTeacher(this);
         }
-        else {
-            try {
-                tableFile.flush();
-                tableFile.close();
-                tableFile = null;
-            } catch (Exception e) {
-                // enters here when it shall log but the logging is not enabled
+        timetable = new Timetable();
+        teachers.add(this);
+        Log.logData("Fetched " + this);
+    }
+
+    private Teacher(int id, String cnp, String surname, String name, String gender, String phone, String mail, int salary, String job, String hire_date, String subject, String dept_id) {
+        super(id, cnp, surname, name, gender, phone, mail, salary, job, hire_date);
+        this.subject = subject;
+        department = null;
+        if (dept_id != null) {
+            department = Department.getDepartment(Integer.parseInt(dept_id));
+            if (department != null) {
+                department.addTeacher(this);
             }
+        }
+        timetable = new Timetable();
+        teachers.add(this);
+        Log.logData("Created new " + this);
+    }
+
+    static public boolean createTeacher (int id, String cnp, String surname, String name, String gender, String phone, String mail, String salary, String job, String hire_date, String subject, String dept_id) {
+        if (getTeacher(id) != null) {
+            System.out.println("Teacher id already exists");
+            return false;
+        }
+        if (salary == null) {salary = "0";}
+        String[] cols = {idName, "cnp", "surname", "name", "gender", "phone", "mail", "salary", "job", "hire_date", "subject", "dept_id"};
+        String[] vals = {Integer.toString(id), "'"+cnp+"'", "'"+surname+"'", "'"+name+"'", "'"+gender+"'", "'"+phone+"'", "'"+mail+"'", salary, "'"+job+"'", "'"+hire_date+"'", "'"+subject+"'", dept_id};
+        if (DB.insertData(tableName, cols, vals)) {
+            new Teacher(id, cnp, surname, name, gender, phone, mail, Integer.parseInt(salary), job, hire_date, subject, dept_id);
+            return true;
+        } else {return false;}
+    }
+
+    static public boolean createTeacher (int id, String subject, String dept_id) {
+        return createTeacher(id, null, null, null, null, null, null, null, null, null, subject, dept_id);
+    }
+
+    public static Teacher getTeacher (int id) {
+        for (Teacher teacher: teachers) {
+            if (teacher.id == id) {
+                return teacher;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteTeacher () {
+//        timetable.delete();
+        if (department != null) {department.removeTeacher(this);}
+        if (DB.deleteData(tableName,  idName + "=" + id)) {
+            teachers.remove(this);
+            return true;
+        } else { // fail -> revert
+            if (department != null) {department.addTeacher(this);}
+            return false;
         }
     }
 
     @Override
-    protected void updated () {
-        if (!fetchedAll) {return;}
-        Log.logData("Updated " + this);
-        enableModify (false);
-        tableFile = enableTable(fileName, false);
-        for (int i = 0; i < teacherIdCnt; ++i)
-            if (teachers[i] != null)
-                teachers[i].saveData(tableFile);
+    protected String getTableName() {
+        return tableName;
     }
 
-    protected Teacher (String[] csvData) {
-        super (csvData);
-        subject = csvData[11];
-        this.timetable = new Timetable();
-        department = null;
-        teachers[id] = this;
-        teacherIdCnt = id + 1;
-        if (csvData[12].length() != 0) {
-            Department dep = Department.getDepartment(Integer.parseInt(csvData[12]));
-            if (dep != null) {
-                dep.addTeacher(this);
-            }
-        }
-    }
-
-    public Teacher (String subject) { // testing purpose
-        super(teacherIdCnt++, "", "", "", 'M', "", "", 0, "Teacher", "");
-        this.subject   = subject;
-        this.timetable = new Timetable();
-        teachers[id] = this;
-        Log.logData("Created new " + this);
-        saveData(tableFile);
-    }
-
-    public Teacher(String cnp, String surname, String name, char gender, String phone, String mail, int salary, String job, String EmploymentDate, String subject) {
-        super(teacherIdCnt++, cnp, surname, name, gender, phone, mail, salary, job, EmploymentDate);
-        this.subject = subject;
-        timetable    = new Timetable();
-        teachers[id] = this;
-        Log.logData("Created new " + this);
-        saveData(tableFile);
-    }
-
-    static public boolean canCreate() {
-        return teacherIdCnt < teacherMaxCnt;
-    }
-
-    public static Teacher getTeacher (int id) {
-        return id >= teacherIdCnt ? null : teachers[id];
+    @Override
+    protected String getIdName () {
+        return idName;
     }
 
     public String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-        updated();
+    public boolean setSubject(String subject) {
+        if (DB.updateData(getTableName(), "subject", "'"+subject+"'", getIdName() + "=" + id)) {
+            this.subject = subject;
+            return true;
+        } else {return false;}
     }
 
     public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-        updated();
+    public boolean setDepartment(Department department) {
+        // this call should only be made from a Department Object
+        if (DB.updateData(getTableName(), "dept_id", (department == null ? null : Integer.toString(department.getId())), getIdName() + "=" + id)) {
+            this.department = department;
+            return true;
+        } else {return false;}
     }
 
     public void addHour(Hour hour) {
@@ -141,23 +161,23 @@ public class Teacher extends Employee {
     }
 
     public static void printTeachers() {
-        if (teacherIdCnt == 0) {System.out.println("No Teachers"); return;}
+        if (teachers.size() == 0) {System.out.println("No Teachers"); return;}
         String toPrint = "Teachers [";
-        for (int currPoz = 0; currPoz < teacherIdCnt; ++currPoz) {
-            toPrint += "\n\t " + teachers[currPoz];
+        for (Teacher teacher : teachers) {
+            toPrint += "\n\t " + teacher;
         }
         toPrint += "\n]";
         System.out.println(toPrint);
     }
 
     public static void printTeachersNoDep() {
-        if (teacherIdCnt == 0) {System.out.println("No Teachers"); return;}
+        if (teachers.size() == 0) {System.out.println("No Teachers"); return;}
         boolean atLestOne = false;
         String toPrint = "Teachers [";
-        for (int currPoz = 0; currPoz < teacherIdCnt; ++currPoz) {
-            if (teachers[currPoz].department == null) {
+        for (Teacher teacher : teachers) {
+            if (teacher.department == null) {
                 atLestOne = true;
-                toPrint += "\n\t " + teachers[currPoz];
+                toPrint += "\n\t " + teacher;
             }
         }
         toPrint += "\n]";
@@ -167,9 +187,5 @@ public class Teacher extends Employee {
     @Override
     public String toString() {
         return subject + " Teacher " + super.toString() + " is in " + (department == null ? "no department" : department);
-    }
-
-    protected String toCsv() {
-        return super.toCsv() + "," + subject + "," + (department == null ? "" : department.getId());
     }
 }

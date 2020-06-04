@@ -1,18 +1,29 @@
-Created new Department{id=0; name='Info'},2020-04-22 01:23:50.504
-Created new Department{id=1; name='Algebra'},2020-04-22 01:23:50.504
-Created new Department{id=2; name='Geometry'},2020-04-22 01:23:50.504
-Created new Boolean Algebra Teacher {Id: 0, CNP: , Name:  , Gender: M, Phone: , mail: } has salary $0 working as Teacher from  to date is in no department,2020-04-22 01:23:50.514
-Created new Boolean Algebra1 Teacher {Id: 1, CNP: , Name:  , Gender: M, Phone: , mail: } has salary $0 working as Teacher from  to date is in no department,2020-04-22 01:23:50.514
-Created new Boolean Algebra2 Teacher {Id: 2, CNP: , Name:  , Gender: M, Phone: , mail: } has salary $0 working as Teacher from  to date is in no department,2020-04-22 01:23:50.514
-Updated Boolean Algebra1 Teacher {Id: 1, CNP: , Name:  , Gender: M, Phone: , mail: } has salary $0 working as Teacher from  to date is in Department{id=1; name='Algebra'},2020-04-22 01:23:50.514
-Updated Boolean Algebra2 Teacher {Id: 2, CNP: , Name:  , Gender: M, Phone: , mail: } has salary $0 working as Teacher from  to date is in Department{id=1; name='Algebra'},2020-04-22 01:23:50.514
-Created new Student{Id: 0, CNP: , Name:  Andrei, Gender: M, Phone: , mail: } is in no class,2020-04-22 01:23:50.514
-Created new Student{Id: 1, CNP: , Name:  ana, Gender: M, Phone: , mail: } is in no class,2020-04-22 01:23:50.514
-Created new Student{Id: 2, CNP: , Name:  josheph, Gender: M, Phone: , mail: } is in no class,2020-04-22 01:23:50.514
-Created new ClassOfStudents {id=0; name='232.1'},2020-04-22 01:23:50.514
-Created new ClassOfStudents {id=1; name='232.2'},2020-04-22 01:23:50.514
-Updated Student{Id: 0, CNP: , Name:  Andrei, Gender: M, Phone: , mail: } is in ClassOfStudents {id=0; name='232.1'},2020-04-22 01:23:50.514
-Updated Student{Id: 1, CNP: , Name:  ana, Gender: M, Phone: , mail: } is in ClassOfStudents {id=0; name='232.1'},2020-04-22 01:23:50.514
-Updated Student{Id: 2, CNP: , Name:  josheph, Gender: M, Phone: , mail: } is in ClassOfStudents {id=1; name='232.2'},2020-04-22 01:23:50.514
-Updated Student{Id: 1, CNP: , Name:  ana, Gender: M, Phone: , mail: } is in no class,2020-04-22 01:23:50.514
-Updated Student{Id: 1, CNP: , Name:  ana, Gender: M, Phone: , mail: } is in ClassOfStudents {id=1; name='232.2'},2020-04-22 01:23:50.524
+2020-06-04 23:31:05.599,main,Started fetching data for departments
+2020-06-04 23:31:05.604,main,Fetched Department{id=1; name='Algebra'}
+2020-06-04 23:31:05.605,main,Fetched Department{id=2; name='Analiza'}
+2020-06-04 23:31:05.605,main,Stopped fetching data for departments
+2020-06-04 23:31:05.608,main,Started fetching data for teachers
+2020-06-04 23:31:05.609,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-04 23:31:05.609,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-04 23:31:05.61,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-04 23:31:05.61,main,Stopped fetching data for teachers
+2020-06-04 23:31:05.611,main,Started fetching data for classes
+2020-06-04 23:31:05.612,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-04 23:31:05.612,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-04 23:31:05.612,main,Stopped fetching data for classes
+2020-06-04 23:31:05.615,main,Started fetching data for students
+2020-06-04 23:31:05.615,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-04 23:31:05.617,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-04 23:31:05.618,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-04 23:31:05.618,main,Stopped fetching data for students
+2020-06-04 23:31:05.619,main,Created new Department{id=10; name='Info'}
+2020-06-04 23:31:05.62,main,Created new Department{id=13; name='Geometry'}
+2020-06-04 23:31:05.623,main,Created new Geometry Teacher {Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-04 23:31:05.627,main,Created new Boolean Algebra Teacher {Id: 21, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-04 23:31:05.628,main,Created new Boolean Algebra1 Teacher {Id: 22, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-04 23:31:05.628,main,Created new Boolean Algebra2 Teacher {Id: 23, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-04 23:31:05.637,main,Created new ClassOfStudents {id=31; name='232.1'}
+2020-06-04 23:31:05.638,main,Created new ClassOfStudents {id=32; name='232.2'}
+2020-06-04 23:31:05.638,main,Created new Student{Id: 11, CNP: , Name:  Andrei, Gender: M, Phone: , mail: } is in no class
+2020-06-04 23:31:05.639,main,Created new Student{Id: 12, CNP: , Name:  ana, Gender: M, Phone: , mail: } is in no class
+2020-06-04 23:31:05.641,main,Created new Student{Id: 13, CNP: , Name:  josheph, Gender: M, Phone: , mail: } is in ClassOfStudents {id=31; name='232.1'}

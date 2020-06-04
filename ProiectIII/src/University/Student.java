@@ -1,104 +1,123 @@
 package University;
 
+import DB.DB;
 import MyLog.Log;
 import People.Person;
 
-import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Student extends Person {
-    private static boolean fetchedAll = false;
-    private static String fileName = "Student.csv";
-    private static FileWriter tableFile = null;
-    static private int studentsIdCnt = 0;
-    static private int studentsMaxCnt = 10;
-    static private Student[] students = new Student[studentsMaxCnt];
+    // project specific added fields (static)
+    static private String tableName = "students";
+    static private String idName    = "student_id";
+    static private ArrayList<Student> students = new ArrayList<>();
+    // project specific added fields;
     private ClassOfStudents cls; // should be changed only from ClassOfStudents class
-    // TODO: record marks
 
     public static void fetchData() {
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
-            String row;
-            csvReader.readLine(); // Skip first line
-            while ((row = csvReader.readLine()) != null) {
-                new Student ((row+",.").split(","));
+        ResultSet data = DB.fetchData(tableName);
+        if (data == null) {
+            Log.logData("No prior data for " + tableName);
+            return;
+        }
+        try {
+            Log.logData("Started fetching data for " + tableName);
+            while (data.next()) {
+                new Student(data);
             }
-            fetchedAll = true;
-        } catch (FileNotFoundException e) {
-            System.out.println("No prior data saved for Departments");
-        } catch (IOException e) {
+        } catch (SQLException e) {
+            System.out.println("Data fetching for " + tableName + " has been interrupted");
             e.printStackTrace();
         } finally {
-            enableModify(true);
+            Log.logData("Stopped fetching data for " + tableName);
         }
     }
 
-    public static void enableModify(boolean enable) {
-        if (enable) {
-            tableFile = enableTable(fileName, true);
-        }
-        else {
-            try {
-                tableFile.flush();
-                tableFile.close();
-                tableFile = null;
-            } catch (Exception e) {
-                // enters here when it shall log but the logging is not enabled
-            }
-        }
-    }
-
-    protected void updated () {
-        if (!fetchedAll) {return;}
-        Log.logData("Updated " + this);
-        enableModify (false);
-        tableFile = enableTable(fileName, false);
-        for (int i = 0; i < studentsIdCnt; ++i)
-            if (students[i] != null)
-                students[i].saveData(tableFile);
-    }
-
-    public Student(String[] csvData) {
-        super (csvData);
+    private Student (ResultSet data) throws SQLException {
+        super(data);
         cls = null;
-        students[id] = this;
-        studentsIdCnt = id + 1;
-        if (csvData[7].length() != 0) {
-            ClassOfStudents clss = ClassOfStudents.getClass(Integer.parseInt(csvData[7]));
-            if (clss != null) {
-                clss.addStudent(this);
+        if (data.getString("class_id") != null) {
+            ClassOfStudents.getClass(Integer.parseInt(data.getString("class_id"))).addStudent(this);
+        }
+        students.add(this);
+        Log.logData("Fetched " + this);
+    }
+
+    private Student(int id, String cnp, String surname, String name, String gender, String phone, String mail, String class_id) {
+        super(id, cnp, surname, name, gender, phone, mail);
+        cls = null;
+        if (class_id != null) {
+            cls = ClassOfStudents.getClass(Integer.parseInt(class_id));
+            if (cls != null) {
+                cls.addStudent(this);
             }
+        }
+        students.add(this);
+        Log.logData("Created new " + this);
+    }
+
+    static public boolean createStudent (int id, String cnp, String surname, String name, String gender, String phone, String mail, String class_id) {
+        if (getStudent(id) != null) {
+            System.out.println("Student id already exists");
+            return false;
+        }
+        String[] cols = {idName, "cnp", "surname", "name", "gender", "phone", "mail", "class_id"};
+        String[] vals = {Integer.toString(id), "'"+cnp+"'", "'"+surname+"'", "'"+name+"'", "'"+gender+"'", "'"+phone+"'", "'"+mail+"'", class_id};
+        if (DB.insertData(tableName, cols, vals)) {
+            new Student(id, cnp, surname, name, gender, phone, mail, class_id);
+            return true;
+        } else {return false;}
+    }
+
+    static public boolean createStudent (int id, String name, String class_id) { // testing purpose and for the interface
+        return createStudent(id, "", "", name, "M", "", "", class_id);
+    }
+
+    public boolean deleteStudent () {
+//        timetable.delete();
+        if (cls != null) {cls.removeJustStudent(this);}
+        if (DB.deleteData(tableName,  idName + "=" + id)) {
+            students.remove(this);
+            return true;
+        } else { // fail -> revert
+            if (cls != null) {cls.addStudent(this);}
+            return false;
         }
     }
 
-    public Student(String name) { // testing purpose and for the gast interface
-        super(studentsIdCnt++, "", "", name, 'M', "", "");
-        students[id] = this;
-        Log.logData("Created new " + this);
-        saveData(tableFile);
+    @Override
+    protected String getTableName() {
+        return tableName;
     }
 
-    public Student(String cnp, String surname, String name, char gender, String phone, String mail) {
-        super(studentsIdCnt++, cnp, surname, name, gender, phone, mail);
-        students[id] = this;
-        Log.logData("Created new " + this);
-        saveData(tableFile);
-    }
-
-    static public boolean canCreate() {
-        return studentsIdCnt < studentsMaxCnt;
+    @Override
+    protected String getIdName () {
+        return idName;
     }
 
     static public Student getStudent (int id) {
-        return id >= studentsIdCnt ? null : students[id];
+        for (Student student : students) {
+            if (student.id == id) {
+                return student; // found
+            }
+        }
+        return null; // not found
     }
 
     public ClassOfStudents getCls() {
         return cls;
     }
 
-    public void setCls(ClassOfStudents cls) {
-        this.cls = cls;
-        updated();
+    public boolean setCls(ClassOfStudents cls) {
+        // this call should only be made from a ClassOfStudnets Object
+        if (DB.updateData(getTableName(), "class_id", (cls == null ? null : Integer.toString(cls.getId())), getIdName() + "=" + id)) {
+            if (this.cls != null) {this.cls.removeJustStudent(this);}
+            this.cls = cls;
+            if (cls != null) {cls.addJustStudent(this);}
+            return true;
+        } else {return false;}
     }
 
     @Override
@@ -110,10 +129,10 @@ public class Student extends Person {
     }
 
     public static void printStudents() {
-        if (studentsIdCnt == 0) {System.out.println("No Students"); return;}
+        if (students.size() == 0) {System.out.println("No Students"); return;}
         String toPrint = "Students [";
-        for (int currPoz = 0; currPoz < studentsIdCnt; ++currPoz) {
-            toPrint += "\n\t " + students[currPoz];
+        for (Student student : students) {
+            toPrint += "\n\t " + student;
         }
         toPrint += "\n]";
         System.out.println(toPrint);
@@ -132,10 +151,5 @@ public class Student extends Person {
         rez = student1.getName().compareToIgnoreCase(student2.getName());
         if (rez != 0) {return rez < 0 ? -1 : 1;}
         return student1.getId() < student2.getId() ? -1 : 1;
-    }
-
-    @Override
-    protected String toCsv() {
-        return super.toCsv() + "," + (cls == null ? "" : cls.getId());
     }
 }

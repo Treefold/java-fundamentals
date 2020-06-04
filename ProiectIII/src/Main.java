@@ -2,7 +2,7 @@ import University.*;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main {/*
     private static String nextString(Scanner scanner) {
         scanner.nextLine();
         return scanner.nextLine().replace("\n", "").replace(",", ";");
@@ -13,13 +13,6 @@ public class Main {
         Teacher.fetchData();
         ClassOfStudents.fetchData();
         Student.fetchData();
-    }
-
-    private static void close() {
-        Teacher.enableModify(false);
-        Department.enableModify(false);
-        ClassOfStudents.enableModify(false);
-        Student.enableModify(false);
     }
 
     public static void main(String[] args) {
@@ -137,13 +130,9 @@ public class Main {
                         target = scanner.nextInt();
                         switch (target) {
                             case 1:
-                                if (Student.canCreate()) {
-                                    System.out.print("The Student Name is: ");
-                                    new Student(nextString(scanner));
-                                    System.out.println("Success");
-                                } else {
-                                    System.out.println("Student is full, can't create");
-                                }
+                                System.out.print("The Student Name is: ");
+                                new Student(nextString(scanner));
+                                System.out.println("Success");
                                 break;
                             case 2:
                                 if (Teacher.canCreate()) {
@@ -244,7 +233,7 @@ public class Main {
             e.printStackTrace();
         } finally {
             System.out.println("Bye");
-            close();
+            DB.DB.close();
         }
-    }
+    }//*/
 }

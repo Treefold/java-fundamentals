@@ -12,38 +12,41 @@ public class Test {
         Student.fetchData();
     }
 
-    private static void close() {
-        Teacher.enableModify(false);
-        Department.enableModify(false);
-        ClassOfStudents.enableModify(false);
-        Student.enableModify(false);
-    }
-
     public static void main(String[] args) {
-        // manually clean all .csv files and run this code
         open();
+        //*
         System.out.println("Test Department:\n");
         Department.printDepartments();
-        System.out.println(Department.createDep("Info"));
-        System.out.println(Department.createDep("Algebra"));
-        System.out.println(Department.createDep("ALgeBRa"));
-        System.out.println(Department.createDep("Geometry"));
+        Department.createDep(10, "Info");
+        Department.createDep(11, "Algebra");
+        Department.createDep(12, "ALgeBRa");
+        Department.createDep(13, "Geometry");
         Department.printDepartments();
         System.out.println(Department.getDepartment("Info"));
-        System.out.println(Department.getDepartment(2));
-        System.out.println(Department.getDepartment(3));
+        System.out.println(Department.getDepartment(10));
+        System.out.println(Department.getDepartment(13));
+        Department.getDepartment(10).deleteDep();
+        Department.printDepartments();
         Department.getDepartment("Algebra").printTeachers();
         System.out.println("\nEnd of Test Department\n");
 
         printSep();
 
         System.out.println("Test Teacher in Department:\n");
-        Teacher algebraTeach  = new Teacher("Boolean Algebra");
-        Teacher algebraTeach1 = new Teacher("Boolean Algebra1");
-        Teacher algebraTeach2 = new Teacher("Boolean Algebra2");
-//        Teacher algebraTeach  = Teacher.getTeacher(0);
-//        Teacher algebraTeach1 = Teacher.getTeacher(1);
-//        Teacher algebraTeach2 = Teacher.getTeacher(2);
+        Teacher.createTeacher(3, "Geometry", null);
+        Department.getDepartment(13).addTeacher(Teacher.getTeacher(3));
+        Teacher.printTeachers();
+        Department.getDepartment(13).deleteDep();
+        System.out.println(Teacher.getTeacher(3));
+        Teacher.getTeacher(3).deleteTeacher();
+        Teacher.printTeachers();
+        Teacher.createTeacher(21, "Boolean Algebra", Integer.toString(Department.getDepartment("algebra").getId()));
+        Teacher.createTeacher(22, "Boolean Algebra1", null);
+        Teacher.createTeacher(23, "Boolean Algebra2", null);
+        Teacher.printTeachers();
+        Teacher algebraTeach  = Teacher.getTeacher(21);
+        Teacher algebraTeach1 = Teacher.getTeacher(22);
+        Teacher algebraTeach2 = Teacher.getTeacher(23);
         System.out.println(algebraTeach);
         System.out.println(algebraTeach1);
         System.out.println(Department.getDepartment("Algebra").isInDepartments(algebraTeach));
@@ -56,28 +59,48 @@ public class Test {
         System.out.println(Department.getDepartment("Algebra").isInDepartments(algebraTeach));
         System.out.println(Department.getDepartment("Algebra").isInDepartments(algebraTeach1));
         System.out.println();
+        algebraTeach.deleteTeacher();
+        algebraTeach1.deleteTeacher();
+        algebraTeach2.deleteTeacher();
+        System.out.println(Department.getDepartment("Algebra"));
         System.out.println("End of Test Teacher in Department\n");
 
         printSep();
 
         System.out.println("Test Students in Class(ofStudents):\n");
-        Student[] students = {new Student("Andrei"), new Student("ana"), new Student("josheph")};
-//        Student[] students = {Student.getStudent(0), Student.getStudent(1), Student.getStudent(2)};
-        System.out.println(students[0] + "\n" + students[1] + "\n" + students[2] + "\n");
-        ClassOfStudents[] classes = {new ClassOfStudents("232.1"), new ClassOfStudents("232.2")};
-//        ClassOfStudents[] classes = {ClassOfStudents.getClass(0), ClassOfStudents.getClass(1)};
+        ClassOfStudents.createClass(31,"232.1");
+        ClassOfStudents.createClass(32,"232.2");
+        ClassOfStudents[] classes = {ClassOfStudents.getClass(31), ClassOfStudents.getClass(32)};
+        Student.createStudent(11, "Andrei", null);
+        Student.createStudent(12, "ana", null);
+        Student.createStudent(13, "josheph", "31");
 
-        System.out.println(classes[0] + "\n" + classes[1] + "\n");
-        classes[0].addStudent(students[0]); //System.out.println(classes[0] + "\n" + classes[1] + "\n");
-        classes[0].addStudent(students[1]); //System.out.println(classes[0] + "\n" + classes[1] + "\n");
-        classes[1].addStudent(students[2]); System.out.println(classes[0] + "\n" + classes[1] + "\n");
-        classes[1].addStudent(students[1]); System.out.println(classes[0] + "\n" + classes[1] + "\n"); // transfer student
+        Student[] students = {Student.getStudent(11), Student.getStudent(12), Student.getStudent(13)};
+
+        classes[0].printStudents(); classes[1].printStudents();
+
+        classes[0].addStudent(students[1]);
+
+        classes[0].printStudents(); classes[1].printStudents();
+
+        classes[1].addStudent(students[2]);
+
+        classes[0].printStudents(); classes[1].printStudents();
+
+        for (Student student : students) {
+            student.deleteStudent();
+        }
+        Student.printStudents();
+
+        for (ClassOfStudents cls : classes) {
+            cls.deleteClass();
+        }
+
         System.out.println("End of Test Students in Class(ofStudents)\n");
-
         printSep();
-        // The next one doesn't save its data
 
-        System.out.println("Test Hour in Timetable with Teacher & Class(ofStudents):\n");
+        // The next one doesn't save its data
+        System.out.println("TestNoBD Hour in Timetable with Teacher & Class(ofStudents):\n");
         algebraTeach.printTimetable();
         classes[0].printTimetable();
         classes[1].printTimetable();
@@ -93,7 +116,6 @@ public class Test {
         classes[0].printTimetable();
         classes[1].printTimetable();
 
-        System.out.println("End of Test Hour in Timetable with Teacher & Class(ofStudents)\n");
-        close();
+        System.out.println("End of TestNoBD Hour in Timetable with Teacher & Class(ofStudents)\n");
     }
 }

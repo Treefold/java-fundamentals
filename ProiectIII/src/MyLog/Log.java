@@ -19,7 +19,9 @@ public class Log {
     }
     public static void logData (String data) {
         try {
-            log.csvWriter.append(data + "," + (new Timestamp(System.currentTimeMillis())).toString());
+            log.csvWriter.append((new Timestamp(System.currentTimeMillis())).toString());
+            log.csvWriter.append("," + Thread.currentThread().getName());
+            log.csvWriter.append("," + data);
             log.csvWriter.append("\n");
             log.csvWriter.flush();
 

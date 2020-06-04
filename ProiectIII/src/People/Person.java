@@ -1,27 +1,30 @@
 package People;
 
-import MyLog.Table;
+import DB.DB;
 
-public abstract class Person extends Table {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public abstract class Person {
     protected int    id;
     protected String cnp;
     protected String surname;
     protected String name;
-    protected char   gender;
+    protected String gender;
     protected String phone;
     protected String mail;
 
-    protected Person (String[] csvData) {
-        id      = Integer.parseInt(csvData[0]);
-        cnp     = csvData[1];
-        surname = csvData[2];
-        name    = csvData[3];
-        gender  = csvData[4].charAt(0);
-        phone   = csvData[5];
-        mail    = csvData[6];
+    protected Person (ResultSet data) throws SQLException {
+        id      = Integer.parseInt(data.getString(getIdName()));
+        cnp     = data.getString("cnp");
+        surname = data.getString("surname");
+        name    = data.getString("name");
+        gender  = data.getString("gender");
+        phone   = data.getString("phone");
+        mail    = data.getString("mail");
     }
 
-    public Person(int id, String cnp, String surname, String name, char gender, String phone, String mail) {
+    public Person(int id, String cnp, String surname, String name, String gender, String phone, String mail) {
         this.id      = id;
         this.cnp     = cnp;
         this.surname = surname;
@@ -29,6 +32,85 @@ public abstract class Person extends Table {
         this.gender  = gender;
         this.phone   = phone;
         this.mail    = mail;
+    }
+    abstract protected String getTableName ();
+    abstract protected String getIdName ();
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean setId(int id) {
+        if (DB.updateData(getTableName(), getIdName(), Integer.toString(id), getIdName() + "=" + id)) {
+            this.id = id;
+            return true;
+        } else {return false;}
+    }
+
+    public String getCnp() {
+        return cnp;
+    }
+
+    public boolean setCnp(String cnp) {
+        if (DB.updateData(getTableName(),"cnp", "'"+cnp+"'", getIdName() + "=" + id)) {
+            this.cnp = cnp;
+            return true;
+        } else {return false;}
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public boolean setSurname(String surname) {
+        if (DB.updateData(getTableName(), "surname", "'"+surname+"'", getIdName() + "=" + id)) {
+            this.surname = surname;
+            return true;
+        } else {return false;}
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean setName(String name) {
+        if (DB.updateData(getTableName(), "name", "'"+name+"'", getIdName() + "=" + id)) {
+            this.name = name;
+            return true;
+        } else {return false;}
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public boolean setGender(String gender) {
+        if (DB.updateData(getTableName(), "gender", "'"+gender+"'", getIdName() + "=" + id)) {
+            this.gender = gender;
+            return true;
+        } else {return false;}
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public boolean setPhone(String phone) {
+        if (DB.updateData(getTableName(), "phone", "'"+phone+"'", getIdName() + "=" + id)) {
+            this.phone = phone;
+            return true;
+        } else {return false;}
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public boolean setMail(String mail) {
+        if (DB.updateData(getTableName(), "mail", "'"+mail+"'", getIdName() + "=" + id)) {
+            this.mail = mail;
+            return true;
+        } else {return false;}
     }
 
     @Override
@@ -39,60 +121,6 @@ public abstract class Person extends Table {
                 ", Gender: " + gender +
                 ", Phone: "  + phone +
                 ", mail: "   + mail;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-        updated();
-    }
-
-    public void setName(String name) {
-        this.name = name;
-        updated();
-
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-        updated();
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-        updated();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getCnp() {
-        return cnp;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public char getGender() {
-        return gender;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    @Override
-    protected String toCsv () {
-        return id + "," + cnp + "," + surname + "," + name + "," + gender + "," + phone + "," + mail;
     }
 }
 
