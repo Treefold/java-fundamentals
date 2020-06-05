@@ -72,7 +72,7 @@ public class Student extends Person {
     }
 
     static public boolean createStudent (int id, String name, String class_id) { // testing purpose and for the interface
-        return createStudent(id, "", "", name, "M", "", "", class_id);
+        return createStudent(id, null, null, name, null, null, null, class_id);
     }
 
     public boolean deleteStudent () {

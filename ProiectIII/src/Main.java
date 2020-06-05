@@ -2,10 +2,10 @@ import University.*;
 
 import java.util.Scanner;
 
-public class Main {/*
+public class Main {//*
     private static String nextString(Scanner scanner) {
         scanner.nextLine();
-        return scanner.nextLine().replace("\n", "").replace(",", ";");
+        return scanner.nextLine().replace("\n", "");
     }
 
     private static void open () {
@@ -17,6 +17,8 @@ public class Main {/*
 
     public static void main(String[] args) {
         open();
+        int action, target, id, targetId;
+        String name;
         try {
             boolean exit = false;
             while (!exit) {
@@ -27,8 +29,7 @@ public class Main {/*
                         "3. Modify Entity in Table\n");
                 System.out.print("Your choice: ");
                 Scanner scanner = new Scanner(System.in);
-                int action = scanner.nextInt();
-                int target, id, targetId;
+                action = scanner.nextInt();
                 switch (action) {
                     case 0:
                         exit = true;
@@ -120,7 +121,7 @@ public class Main {/*
                                 throw new RuntimeException("Unsupported target: " + target);
                         }
                         break;
-                    case 2:
+                    case 2: {
                         System.out.println("Target table:\n" +
                                 "1. Student\n" +
                                 "2. Teacher\n" +
@@ -130,44 +131,54 @@ public class Main {/*
                         target = scanner.nextInt();
                         switch (target) {
                             case 1:
+                                System.out.print("The Student Id is: ");
+                                id = scanner.nextInt();
                                 System.out.print("The Student Name is: ");
-                                new Student(nextString(scanner));
-                                System.out.println("Success");
-                                break;
-                            case 2:
-                                if (Teacher.canCreate()) {
-                                    System.out.print("The Teacher Subject: ");
-                                    new Teacher(nextString(scanner));
+                                name = nextString(scanner);
+                                if (Student.createStudent(id, name, null)) {
                                     System.out.println("Success");
                                 } else {
-                                    System.out.println("Teacher is full, can't create");
+                                    System.out.println("Failed");
+                                }
+                                break;
+                            case 2:
+                                System.out.print("The Teacher Id is: ");
+                                id = scanner.nextInt();
+                                System.out.print("The Teacher Subject: ");
+                                name = nextString(scanner);
+                                if (Teacher.createTeacher(id, name, null)) {
+                                    System.out.println("Success");
+                                } else {
+                                    System.out.println("Failed");
                                 }
                                 break;
                             case 3:
-                                if (Department.canCreate()) {
-                                    System.out.print("The Department Name: ");
-                                    if (Department.createDep(nextString(scanner)) == -1) {
-                                        System.out.println("Department already exists");
-                                    } else {
-                                        System.out.println("Success");
-                                    }
+                                System.out.print("The Department Id is: ");
+                                id = scanner.nextInt();
+                                System.out.print("The Department Name: ");
+                                name = nextString(scanner);
+                                if (Department.createDep(id, name)) {
+                                    System.out.println("Success");
                                 } else {
-                                    System.out.println("Department is full, can't create");
+                                    System.out.println("Failed");
                                 }
                                 break;
                             case 4:
-                                if (ClassOfStudents.canCreate()) {
-                                    System.out.print("The Class Name: ");
-                                    new ClassOfStudents(nextString(scanner));
+                                System.out.print("The Class Id is: ");
+                                id = scanner.nextInt();
+                                System.out.print("The Class Name: ");
+                                name = nextString(scanner);
+                                if (ClassOfStudents.createClass(id, name)) {
                                     System.out.println("Success");
                                 } else {
-                                    System.out.println("Class is full, can't create");
+                                    System.out.println("Failed");
                                 }
                                 break;
                             default:
                                 throw new RuntimeException("Unsupported target table: " + target);
                         }
                         break;
+                    }
                     case 3:
                         System.out.println("Target table:\n" +
                                 "1. Student Name\n" +
