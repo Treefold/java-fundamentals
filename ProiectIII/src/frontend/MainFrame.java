@@ -6,31 +6,11 @@ import backend.University.Student;
 import backend.University.Teacher;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame {
 
-//
-//    private TextPanel textPanel;
-//    private Toolbar   toolbar;
-//
-//    public MainFrame() throws HeadlessException {
-//        super("FirstApp");
-//        setLayout(new BorderLayout());
-//        setSize(500, 500);
-//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//
-//        textPanel = new TextPanel();
-//        add(textPanel, BorderLayout.CENTER);
-//
-//        toolbar = new Toolbar();
-//        add(toolbar, BorderLayout.NORTH);
-//
-//        toolbar.setTypingListener(text -> textPanel.appendText(text));
-//
-//        setVisible(true);
-//    }
+    public Thread thread = new Thread(() -> exec());
 
     private static void open () {
         Department.fetchData();
@@ -38,20 +18,20 @@ public class MainFrame extends JFrame {
         ClassOfStudents.fetchData();
         Student.fetchData();
     }
-    public MainFrame() throws HeadlessException {
-        super("FirstApp");
-//        setLayout(new BorderLayout());
-//        setSize(500, 500);
+    public MainFrame() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         open();
+        thread.run();
+    }
+
+    private void exec () {
         int action, target, id, targetId;
         String name;
         try {
             boolean exit = false;
             while (!exit) {
                 action = Integer.parseInt(JOptionPane.showInputDialog(
-                                "\tChoose your action:\n" +
+                        "\tChoose your action:\n" +
                                 "0. Exit\n" +
                                 "1. Predefined Interrogations\n" +
                                 "2. Create Entity in Table\n" +
@@ -63,7 +43,7 @@ public class MainFrame extends JFrame {
                         break;
                     case 1:
                         target = Integer.parseInt(JOptionPane.showInputDialog(
-                                        "Target table:\n" +
+                                "Target table:\n" +
                                         "1.  View Student\n" +
                                         "2.  View Teacher\n" +
                                         "3.  View Department\n" +
@@ -254,13 +234,17 @@ public class MainFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println("Bye");
             backend.DB.DB.close();
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }
 
     public static void main(String[] args) {
         MainFrame mainFrame = new MainFrame();
-        mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
+        try {
+            mainFrame.thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -192,3 +192,183 @@
 2020-06-05 10:10:47.596,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
 2020-06-05 10:10:47.606,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
 2020-06-05 10:10:47.606,main,Stopped fetching data for students
+2020-06-05 10:21:59.813,main,Started fetching data for departments
+2020-06-05 10:21:59.813,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 10:21:59.813,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 10:21:59.813,main,Fetched Department{id=11; name='Info'}
+2020-06-05 10:21:59.813,main,Stopped fetching data for departments
+2020-06-05 10:21:59.823,main,Started fetching data for teachers
+2020-06-05 10:21:59.823,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:21:59.823,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:21:59.823,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 10:21:59.823,main,Stopped fetching data for teachers
+2020-06-05 10:21:59.823,main,Started fetching data for classes
+2020-06-05 10:21:59.823,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:21:59.823,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:21:59.823,main,Stopped fetching data for classes
+2020-06-05 10:21:59.823,main,Started fetching data for students
+2020-06-05 10:21:59.823,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 10:21:59.823,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:21:59.823,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:21:59.823,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:21:59.823,main,Stopped fetching data for students
+2020-06-05 10:23:48.732,main,Started fetching data for departments
+2020-06-05 10:23:48.732,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 10:23:48.732,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 10:23:48.732,main,Fetched Department{id=11; name='Info'}
+2020-06-05 10:23:48.732,main,Stopped fetching data for departments
+2020-06-05 10:23:48.732,main,Started fetching data for teachers
+2020-06-05 10:23:48.742,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:23:48.742,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:23:48.742,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 10:23:48.742,main,Stopped fetching data for teachers
+2020-06-05 10:23:48.742,main,Started fetching data for classes
+2020-06-05 10:23:48.742,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:23:48.742,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:23:48.742,main,Stopped fetching data for classes
+2020-06-05 10:23:48.742,main,Started fetching data for students
+2020-06-05 10:23:48.742,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 10:23:48.742,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:23:48.742,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:23:48.742,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:23:48.742,main,Stopped fetching data for students
+2020-06-05 10:23:55.316,main,Started fetching data for departments
+2020-06-05 10:23:55.326,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 10:23:55.326,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 10:23:55.326,main,Fetched Department{id=11; name='Info'}
+2020-06-05 10:23:55.326,main,Stopped fetching data for departments
+2020-06-05 10:23:55.326,main,Started fetching data for teachers
+2020-06-05 10:23:55.326,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:23:55.326,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:23:55.326,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 10:23:55.326,main,Stopped fetching data for teachers
+2020-06-05 10:23:55.326,main,Started fetching data for classes
+2020-06-05 10:23:55.336,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:23:55.336,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:23:55.336,main,Stopped fetching data for classes
+2020-06-05 10:23:55.336,main,Started fetching data for students
+2020-06-05 10:23:55.336,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 10:23:55.336,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:23:55.336,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:23:55.336,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:23:55.336,main,Stopped fetching data for students
+2020-06-05 10:24:09.665,main,Started fetching data for departments
+2020-06-05 10:24:09.665,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 10:24:09.665,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 10:24:09.665,main,Fetched Department{id=11; name='Info'}
+2020-06-05 10:24:09.665,main,Stopped fetching data for departments
+2020-06-05 10:24:09.675,main,Started fetching data for teachers
+2020-06-05 10:24:09.675,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:24:09.675,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 10:24:09.675,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 10:24:09.675,main,Stopped fetching data for teachers
+2020-06-05 10:24:09.675,main,Started fetching data for classes
+2020-06-05 10:24:09.675,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:24:09.675,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:24:09.675,main,Stopped fetching data for classes
+2020-06-05 10:24:09.675,main,Started fetching data for students
+2020-06-05 10:24:09.675,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 10:24:09.675,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:24:09.675,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 10:24:09.685,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 10:24:09.685,main,Stopped fetching data for students
+2020-06-05 11:09:23.081,main,Started fetching data for departments
+2020-06-05 11:09:23.086,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 11:09:23.086,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 11:09:23.086,main,Fetched Department{id=11; name='Info'}
+2020-06-05 11:09:23.086,main,Stopped fetching data for departments
+2020-06-05 11:09:23.089,main,Started fetching data for teachers
+2020-06-05 11:09:23.09,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:09:23.09,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:09:23.091,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 11:09:23.092,main,Stopped fetching data for teachers
+2020-06-05 11:09:23.093,main,Started fetching data for classes
+2020-06-05 11:09:23.093,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:09:23.093,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:09:23.093,main,Stopped fetching data for classes
+2020-06-05 11:09:23.095,main,Started fetching data for students
+2020-06-05 11:09:23.095,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 11:09:23.096,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:09:23.097,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:09:23.105,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:09:23.106,main,Stopped fetching data for students
+2020-06-05 11:10:33.541,main,Started fetching data for departments
+2020-06-05 11:10:33.547,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 11:10:33.547,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 11:10:33.547,main,Fetched Department{id=11; name='Info'}
+2020-06-05 11:10:33.548,main,Stopped fetching data for departments
+2020-06-05 11:10:33.551,main,Started fetching data for teachers
+2020-06-05 11:10:33.552,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:10:33.552,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:10:33.553,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 11:10:33.553,main,Stopped fetching data for teachers
+2020-06-05 11:10:33.554,main,Started fetching data for classes
+2020-06-05 11:10:33.555,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:10:33.555,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:10:33.555,main,Stopped fetching data for classes
+2020-06-05 11:10:33.556,main,Started fetching data for students
+2020-06-05 11:10:33.556,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 11:10:33.557,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:10:33.558,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:10:33.558,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:10:33.558,main,Stopped fetching data for students
+2020-06-05 11:10:43.653,main,Started fetching data for departments
+2020-06-05 11:10:43.658,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 11:10:43.659,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 11:10:43.659,main,Fetched Department{id=11; name='Info'}
+2020-06-05 11:10:43.659,main,Stopped fetching data for departments
+2020-06-05 11:10:43.661,main,Started fetching data for teachers
+2020-06-05 11:10:43.662,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:10:43.663,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:10:43.664,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 11:10:43.664,main,Stopped fetching data for teachers
+2020-06-05 11:10:43.665,main,Started fetching data for classes
+2020-06-05 11:10:43.665,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:10:43.665,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:10:43.665,main,Stopped fetching data for classes
+2020-06-05 11:10:43.667,main,Started fetching data for students
+2020-06-05 11:10:43.667,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 11:10:43.668,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:10:43.676,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:10:43.678,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:10:43.678,main,Stopped fetching data for students
+2020-06-05 11:27:30.936,main,Started fetching data for departments
+2020-06-05 11:27:30.936,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 11:27:30.936,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 11:27:30.936,main,Fetched Department{id=11; name='Info'}
+2020-06-05 11:27:30.936,main,Stopped fetching data for departments
+2020-06-05 11:27:30.946,main,Started fetching data for teachers
+2020-06-05 11:27:30.946,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:27:30.946,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:27:30.946,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 11:27:30.946,main,Stopped fetching data for teachers
+2020-06-05 11:27:30.946,main,Started fetching data for classes
+2020-06-05 11:27:30.946,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:27:30.946,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:27:30.946,main,Stopped fetching data for classes
+2020-06-05 11:27:30.946,main,Started fetching data for students
+2020-06-05 11:27:30.946,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 11:27:30.946,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:27:30.956,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:27:30.956,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:27:30.956,main,Stopped fetching data for students
+2020-06-05 11:32:48.721,main,Started fetching data for departments
+2020-06-05 11:32:48.731,main,Fetched Department{id=1; name='Algebra'}
+2020-06-05 11:32:48.731,main,Fetched Department{id=2; name='Analiza'}
+2020-06-05 11:32:48.731,main,Fetched Department{id=11; name='Info'}
+2020-06-05 11:32:48.731,main,Stopped fetching data for departments
+2020-06-05 11:32:48.741,main,Started fetching data for teachers
+2020-06-05 11:32:48.741,main,Fetched null Teacher {Id: 10, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:32:48.741,main,Fetched null Teacher {Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in no department
+2020-06-05 11:32:48.741,main,Fetched null Teacher {Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} has salary unknown working as null from null is in Department{id=1; name='Algebra'}
+2020-06-05 11:32:48.741,main,Stopped fetching data for teachers
+2020-06-05 11:32:48.741,main,Started fetching data for classes
+2020-06-05 11:32:48.741,main,Fetched ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:32:48.741,main,Fetched ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:32:48.741,main,Stopped fetching data for classes
+2020-06-05 11:32:48.741,main,Started fetching data for students
+2020-06-05 11:32:48.741,main,Fetched Student{Id: 1, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in no class
+2020-06-05 11:32:48.741,main,Fetched Student{Id: 2, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:32:48.741,main,Fetched Student{Id: 3, CNP: null, Name: null null, Gender: null, Phone: null, mail: null} is in ClassOfStudents {id=2; name='2322'}
+2020-06-05 11:32:48.741,main,Fetched Student{Id: 10, CNP: null, Name: null Vlad, Gender: M, Phone: null, mail: null} is in ClassOfStudents {id=1; name='2321'}
+2020-06-05 11:32:48.741,main,Stopped fetching data for students
