@@ -10,7 +10,7 @@ public class Main {//*
         return scanner.nextLine().replace("\n", "");
     }
 
-    private static void open () {
+    public static void open () {
         Department.fetchData();
         Teacher.fetchData();
         ClassOfStudents.fetchData();
