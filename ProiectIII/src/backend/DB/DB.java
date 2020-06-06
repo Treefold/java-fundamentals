@@ -45,6 +45,9 @@ public class DB {
         } catch (SQLException e) {
             System.out.println("Failed to fetch data from " + tableName);
             return null;
+        } catch (NullPointerException e) {
+            System.out.println("No database connetion");
+            return null;
         }
     }
 
@@ -68,6 +71,8 @@ public class DB {
             System.out.println("Failed to insert into " + tableName);
             e.printStackTrace();
             return ourInstance.connection == null; // when connection is null -> save the changes locally
+        } catch (NullPointerException e) {
+            System.out.println("No database connetion");
         }
         return true;
     }
@@ -96,6 +101,8 @@ public class DB {
             System.out.println("Failed to update " + tableName);
             e.printStackTrace();
             return ourInstance.connection == null; // when connection is null -> save the changes locally
+        } catch (NullPointerException e) {
+            System.out.println("No database connetion");
         }
         return true;
     }
@@ -113,6 +120,8 @@ public class DB {
             System.out.println("Failed to update " + tableName);
             e.printStackTrace();
             return ourInstance.connection == null; // when connection is null -> save the changes locally
+        } catch (NullPointerException e) {
+            System.out.println("No database connetion");
         }
         return true;
     }
@@ -129,6 +138,8 @@ public class DB {
             System.out.println("Failed to delete data from " + tableName);
             e.printStackTrace();
             return ourInstance.connection == null; // when connection is null -> save the changes locally
+        } catch (NullPointerException e) {
+            System.out.println("No database connetion");
         }
         return true;
     }
